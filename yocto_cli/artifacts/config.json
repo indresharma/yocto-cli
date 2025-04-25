@@ -1,0 +1,51 @@
+{
+  "target": "core-image-minimal",
+  "machine": "",
+  "default_machines": {
+    "base": "qemux86-64",
+    "tegra": "jetson-orin-nano",
+    "freescale": "wandboard"
+  },
+  "layers": {
+    "base": [
+      {
+        "url": "git://git.yoctoproject.org/poky",
+        "bblayers": []
+      }
+    ],
+    "tegra": [
+      {
+        "url": "https://github.com/OE4T/meta-tegra.git",
+        "bblayers": ["meta-tegra"]
+      },
+      {
+        "url": "https://github.com/openembedded/meta-openembedded.git",
+        "bblayers": [
+          "meta-openembedded/meta-oe",
+          "meta-openembedded/meta-multimedia",
+          "meta-openembedded/meta-networking",
+          "meta-openembedded/meta-filesystems",
+          "meta-openembedded/meta-python"
+        ]
+      }
+    ],
+    "freescale": [
+      {
+        "url": "https://github.com/Freescale/meta-freescale.git",
+        "bblayers": ["meta-freescale"]
+      },
+      {
+        "url": "https://github.com/Freescale/meta-freescale-3rdparty.git",
+        "bblayers": ["meta-freescale-3rdparty"]
+      }
+    ]
+  },
+  "other_conf": [
+    "PARALLEL_MAKE = '-j 22'",
+    "BB_NUMBER_THREADS = '22'",
+    "INHERIT += 'rm_work'",
+    "SSTATE_DIR = '/home/yocto/sstate-cache'",
+    "DL_DIR = '/home/yocto/downloads'",
+    "BB_GENERATE_MIRROR_TARBALLS='1'"
+  ]
+}

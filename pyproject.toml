@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yocto_cli"
+version = "1.0.0"
+description = "A cli tool to build and manage yocto builds"
+authors = [
+    {name = "Indresh Sharma", email = "indresharma@gmail.com"}
+]
+
+readme = "README.md"
+requires-python = ">=3.8"
+
+[project.urls]
+"Homepage" = "https://github.com/indresharma/yocto-cli"
+
+[project.scripts]
+yocto-cli = "yocto_cli:main"
+
+[tool.setuptools]
+packages = ["yocto_cli"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+"yocto_cli" = ["artifacts/*"]
