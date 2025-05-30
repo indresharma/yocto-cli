@@ -4,6 +4,7 @@ import logging
 import os
 import subprocess as sp
 import sys
+import shlex
 
 logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
 
@@ -51,7 +52,8 @@ def clone_repo(url, branch, cwd):
     for attempt in range(3):  # Retry up to 3 times
         try:
             dbg(f"Cloning {url} (Attempt {attempt+1}/3)...")
-            execute(f"git clone {url} -b {branch}", cwd=cwd)
+            cmd = f"git clone {url} -b {branch}"
+            execute(shlex.split(cmd), cwd=cwd)
             return
         except:
             dbg(f"Attempt {attempt+1} failed for {url}")
