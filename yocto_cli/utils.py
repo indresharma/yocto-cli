@@ -89,12 +89,12 @@ def parse_config(config, build_type):
     if build_type and build_type != "base":
         layers += config["layers"][build_type]
 
-    _bblayers = []
+    _bblayers = set()
     for layer in layers:
-        _bblayers += layer["bblayers"]
+        _bblayers.update(layer["bblayers"])
 
     for bblayer in _bblayers:
-        bblayers += f'BBLAYERS += "../sources/{bblayer}"'
+        bblayers += f'BBLAYERS += "../sources/{bblayer}" \n'
 
     return (localconf, bblayers)
 
